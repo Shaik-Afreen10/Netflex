@@ -72,7 +72,7 @@ export default function AddGenre() {
     SetUpdate(index);
   };
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-4xl mx-auto bg-gray-100">
       <div className="">
         <h1>Add Genre</h1>
         <span className="text-red-500">{message}</span>

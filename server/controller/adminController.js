@@ -45,22 +45,44 @@ exports.addMovie = async (req, res) => {
   }
 }
 
-exports.editMovie = async (req, res) => {
+// exports.editMovie = async (req, res) => {
  
+//     const movieId = req.params.id;
+//   const {year,desc}=req.body;
+//   try{
+//     const updateMovie =prisma.Movies.update({
+//         where:{id:movieId},
+//         data:{year:parseInt(year),desc},
+//     })
+//     res.status(200).send({status:true,message:updateMovie})
+// }
+// catch(err)
+// {
+//     res.status(400).send({status:false,message:err});
+// }
+// }
+
+exports.editMovie = async (req, res) => {
     const movieId = req.params.id;
-  const {year,desc}=req.body;
-  try{
-    const updateMovie =prisma.Movies.update({
-        where:{id:movieId},
-        data:{year:parseInt(year),desc},
-    })
-    res.status(200).send({status:true,message:updateMovie})
-}
-catch(err)
-{
-    res.status(400).send({status:false,message:err});
-}
-}
+    const updateData = {};
+
+    if (req.body.year) updateData.year = parseInt(req.body.year);
+    if (req.body.desc) updateData.desc = req.body.desc;
+    if (req.body.title) updateData.title = req.body.title;
+    if (req.body.url) updateData.url = req.body.url;
+    if (req.body.bannerUrl) updateData.bannerUrl = req.body.bannerUrl;
+
+    try {
+        const updatedMovie = await prisma.Movies.update({
+            where: { id: movieId },
+            data: updateData,
+        });
+        res.status(200).send({ status: true, message: "Movie updated successfully", data: updatedMovie });
+    } catch (err) {
+        res.status(400).send({ status: false, message: err.message });
+    }
+};
+
 
 exports.deleteGenre = async (req,res)=>{
     console.log(req.params.id);
