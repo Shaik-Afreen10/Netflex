@@ -204,6 +204,11 @@ export default function MovieManager() {
           ...(formData.description && { desc: formData.description }),
         };
 
+        if (Object.keys(payload).length === 0) {
+          setMessage("No changes to save.");
+          return;
+        }
+
         await axios.patch(
           `http://localhost:8060/api/admin/editMovie/${editingMovieId}`,
           payload,
@@ -212,9 +217,23 @@ export default function MovieManager() {
         setMessage("Movie updated successfully!");
         setEditingMovieId(null);
       } else {
+        if (!formData.title || !formData.genre) {
+          setMessage("Title and Genre are required to add a new movie.");
+          return;
+        }
+
+        const addPayload = {
+          title: formData.title,
+          genreId: formData.genre,
+          desc: formData.description, // Corrected key to 'desc' to match backend
+          year: formData.year,
+          url: formData.url,
+          bannerUrl: formData.bannerUrl,
+        };
+
         await axios.post(
-          "http://localhost:8060/api/admin/addMovies",
-          formData,
+          "http://localhost:8060/api/admin/addMovie",
+          addPayload,
           { headers: { Authorization: token } }
         );
         setMessage("Movie added successfully!");
@@ -232,7 +251,7 @@ export default function MovieManager() {
       fetchMovies();
     } catch (err) {
       console.error(err.response?.data || err.message);
-      setMessage("Failed to save movie. Check console.");
+      setMessage(err.response?.data?.message || "Failed to save movie. Check console for details.");
     }
   };
 
@@ -250,19 +269,13 @@ export default function MovieManager() {
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen text-white p-6 "style={{ backgroundImage: ` linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6) ), url(${bg})` }}>
-      {/* Dark overlay */}
-      
-      
+    <div className="bg-gray-900 min-h-screen text-white p-6 " style={{ backgroundImage: ` linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6) ), url(${bg})` }}>
       <h1 className="text-4xl font-bold mb-6 text-center">🎬 Movie Manager</h1>
-
       {message && <div className="bg-red-600 p-2 rounded mb-4">{message}</div>}
-
       <div className="max-w-md mx-auto bg-gray-800 p-4 rounded shadow-md">
         <h2 className="text-2xl font-semibold mb-4">
           {editingMovieId ? "Edit Movie (Year & Description)" : "Add New Movie"}
         </h2>
-
         <select
           name="genre"
           value={formData.genre}
@@ -279,7 +292,6 @@ export default function MovieManager() {
             </option>
           ))}
         </select>
-
         {!editingMovieId && (
           <>
             <input
@@ -308,7 +320,6 @@ export default function MovieManager() {
             />
           </>
         )}
-
         <textarea
           name="description"
           placeholder="Description"
@@ -324,7 +335,6 @@ export default function MovieManager() {
           onChange={handleChange}
           className="w-full p-2 rounded mb-3 bg-gray-700 text-white"
         />
-
         <button
           onClick={handleAddOrEditMovie}
           className="w-full bg-red-600 hover:bg-blue-500 py-2 rounded text-white"
@@ -332,9 +342,7 @@ export default function MovieManager() {
           {editingMovieId ? "Update Movie" : "Add Movie"}
         </button>
       </div>
-
       <h2 className="text-3xl font-semibold mt-10 mb-4 text-center">🎥 Movies in Database</h2>
-
       <div className="overflow-x-auto max-w-4xl mx-auto rounded-lg shadow-md">
         <table className="min-w-full bg-gray-800 rounded shadow-md text-white">
           <thead>
