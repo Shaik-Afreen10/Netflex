@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import netflix_bg from "../../assets/netflix_bg.jpg" ;
 export default function AddGenre() {
   const [genreName, setGenreName] = useState("");
   const [message, setMessage] = useState("");
@@ -72,7 +73,11 @@ export default function AddGenre() {
     SetUpdate(index);
   };
   return (
-    <div className="p-4 max-w-4xl mx-auto bg-gray-100">
+    <div className="p-4 relative bg-gray-500 bg-cover bg-center text-white"
+                            style={{
+                                backgroundImage: `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6) ),url(${netflix_bg})`,
+                                height: "100vh",
+                            }}>
       <div className="">
         <h1>Add Genre</h1>
         <span className="text-red-500">{message}</span>
@@ -94,7 +99,7 @@ export default function AddGenre() {
           </button>
         </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-4 text-white bg-gray">
         <h2 className="text-xl font-bold mb-2">Existing Genres</h2>
         <input
           type="text"
@@ -104,7 +109,7 @@ export default function AddGenre() {
           className="border p-2 rounded mb-4 w-full"
         />
 
-        <table className="min-w-full bg-white">
+        <table className="min-w-full bg-gray-900   text-white rounded shadow-md">
           <thead>
             <tr>
               <th className="py-2 px-4 border-b">ID</th>

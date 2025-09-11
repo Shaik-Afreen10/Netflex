@@ -250,7 +250,7 @@ export default function MovieManager() {
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen text-white p-6 "style={{ backgroundImage: `url(${bg})` }}>
+    <div className="bg-gray-900 min-h-screen text-white p-6 "style={{ backgroundImage: ` linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6) ), url(${bg})` }}>
       {/* Dark overlay */}
       
       

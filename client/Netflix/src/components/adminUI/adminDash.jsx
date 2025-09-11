@@ -1,8 +1,13 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import netflix_bg from "../../assets/netflix_bg.jpg"
 export default function AdminDash() { 
     return (
         //nav bar
-        <div className="p-4">
+        <div className="p-4 relative bg-cover bg-center "
+                        style={{
+                            backgroundImage: `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6) ),url(${netflix_bg})`,
+                            height: "100vh",
+                        }}>
             <div className="bg-gray-800 text-white p-4 rounded-lg shadow-md">
                 <h1 className="text-2xl font-bold">Admin Dashboard</h1>
             </div>

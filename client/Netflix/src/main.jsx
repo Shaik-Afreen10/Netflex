@@ -11,7 +11,7 @@ import AdminDash from './components/adminUI/adminDash';
 import AddMovie from  './components/adminUI/addMovie';
 import AddGenre from  './components/adminUI/addGenre';
 createRoot(root).render(
-  <BrowserRouter>
+  <BrowserRouter >
     <Header />
     <Routes>
         <Route path="/" element={<MainContent />} />
