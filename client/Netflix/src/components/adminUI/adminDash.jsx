@@ -22,7 +22,11 @@ export default function AdminDash() {
                     <div className="bg-white p-4 rounded-lg shadow-md">
                     <h2 className="text-xl font-semibold mb-2">Genre Management</h2>
                     <Link to="/add-genre" className="text-blue-500 hover:underline">+ Add New Genre</Link><br/>
-                    <Link to="/add-genre" className="text-blue-500 hover:underline"> - View Genre</Link>        
+                    <Link to="/view-genre" className="text-blue-500 hover:underline"> - View Genre</Link>        
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-md">
+                    <h2 className="text-xl font-semibold mb-2">Password Management</h2>
+                    <Link to="/change-pass" className="text-blue-500 hover:underline">Change Password</Link>        
                 </div>
             </div>  
         </div>

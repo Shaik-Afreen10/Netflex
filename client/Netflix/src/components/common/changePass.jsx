@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import netflix_bg from "../../assets/netflix_bg.jpg" ;
 
 export default function ChangePassword({ adminId }) {
   const [newPass, setNewPass] = useState("");
@@ -48,31 +49,35 @@ export default function ChangePassword({ adminId }) {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
-      <h2 className="text-2xl font-semibold mb-4">Change Password</h2>
+    <div className="p-4 relative bg-cover bg-center "
+                            style={{
+                                backgroundImage: `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6) ),url(${netflix_bg})`,
+                                height: "100vh",
+                            }}>
+      <h2 className="text-2xl text-white text-center font-semibold mb-4">Change Password</h2>
 
       {error && <p className="text-red-500 mb-3">{error}</p>}
       {message && <p className="text-green-500 mb-3">{message}</p>}
 
-      <form onSubmit={handleChangePassword} className="flex flex-col gap-4">
+      <form onSubmit={handleChangePassword} className="flex items-center flex-col gap-4">
         <input
           type="password"
           placeholder="New Password"
           value={newPass}
           onChange={(e) => setNewPass(e.target.value)}
-          className="border p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border p-2 text-black  max-w-md rounded-md focus:outline-none bg-white focus:ring-2 focus:ring-blue-400"
         />
         <input
           type="password"
           placeholder="Confirm Password"
           value={confirmPass}
           onChange={(e) => setConfirmPass(e.target.value)}
-          className="border p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border p-2 rounded-md text-black max-w-md focus:outline-none bg-white focus:ring-2 focus:ring-blue-400"
         />
 
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+          className="bg-blue-500 text-white py-2 rounded-md max-w-md  hover:bg-blue-600 transition"
         >
           Update Password
         </button>

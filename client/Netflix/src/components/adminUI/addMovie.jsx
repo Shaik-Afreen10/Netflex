@@ -350,6 +350,8 @@ export default function MovieManager() {
               <th className="p-3">Title</th>
               <th className="p-3">Genre</th>
               <th className="p-3">Year</th>
+              <th className="p-3"> Banner</th>
+              <th className="p-3"> Movie</th>
               <th className="p-3">Actions</th>
             </tr>
           </thead>
@@ -359,6 +361,20 @@ export default function MovieManager() {
                 <td className="p-3">{movie.title}</td>
                 <td className="p-3">{typeof movie.genre === "object" ? movie.genre.name : movie.genre}</td>
                 <td className="p-3">{movie.year}</td>
+                <td className="p-3 "><img
+          src={movie.bannerUrl}
+          alt={movie.title + " Banner"}
+          className="w-32 h-auto object-cover"
+        /></td>
+                <td className="p-3"><iframe
+          src={movie.url}
+          width="320"
+          height="180"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title={movie.title + " Video"}
+          className="border rounded"
+        ></iframe></td>
                 <td className="p-3">
                   <button
                     onClick={() => handleEdit(movie)}
@@ -375,3 +391,4 @@ export default function MovieManager() {
     </div>
   );
 }
+
